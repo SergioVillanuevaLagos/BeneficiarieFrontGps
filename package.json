@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "eslint . --ext .ts,.html"
+    "lint": "eslint \"src/**/*.ts\" \"src/**/*.html\""
   },
   "private": true,
   "devDependencies": {
