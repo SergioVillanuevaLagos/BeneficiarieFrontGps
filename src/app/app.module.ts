@@ -10,11 +10,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from './shared/components/components.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {NavbardComponent } from './shared/components/navbard/navbard.component';
 
 @NgModule({
-  // NO DECLARES AppComponent porque es standalone
+
   declarations: [
-    // aquí no va AppComponent
+    AppComponent,
+   NavbardComponent
   ],
   imports: [
     BrowserModule,
@@ -25,9 +27,9 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule
-    // Elimina AppComponent de los imports
+
   ],
   providers: []
-  // Elimina bootstrap: [AppComponent]
+
 })
 export class AppModule { }

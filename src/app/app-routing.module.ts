@@ -1,27 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BeneficiariesComponent } from './views/beneficiaries/beneficiaries.component';
-import { HomeComponent } from './views/home/home.component';
 
-
-const routes: Routes = [
-
-   {
-    path: 'home',
-    loadChildren: () => import('./views/views.module').then(m => m.ViewsModule), component:HomeComponent
-  },
-
+export const appRoutes: Routes = [
   {
-    path: 'beneficiaries',
-    loadChildren: () => import('./views/views.module').then(m => m.ViewsModule), component:BeneficiariesComponent
-  }, {
-    path: 'beneficiares',
+    path: 'home',
     loadChildren: () => import('./views/views.module').then(m => m.ViewsModule)
   },
+  {
+    path: 'beneficiaries',
+    loadChildren: () => import('./views/views.module').then(m => m.ViewsModule)
+  },
+  {
+    path: '',               // Ruta por defecto
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',             // Ruta comodín para rutas no definidas
+    redirectTo: 'home'
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
