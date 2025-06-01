@@ -1,0 +1,16 @@
+.main-layout {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar debe tener ancho fijo */
+app-side-bard {
+  flex: 0 0 250px;
+}
+
+/* Contenido ocupa el resto */
+.main-content {
+  flex: 1;
+  padding: 1rem;
+  background-color: #fff;
+}
