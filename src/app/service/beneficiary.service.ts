@@ -7,7 +7,7 @@ import { IUser } from '../user';
   providedIn: 'root'
 })
 export class BeneficiaryService {
-  private apiUrl = 'http://localhost:8000/beneficiaries'; // El API Gateway redirige
+  private apiUrl = 'http://localhost:8000/beneficiaries';
 
   constructor(private http: HttpClient) { }
 

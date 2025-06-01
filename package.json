@@ -10,21 +10,41 @@
   },
   "private": true,
   "devDependencies": {
+    "@angular-devkit/build-angular": "^14.2.10",
     "@angular-eslint/builder": "^14.0.0",
     "@angular-eslint/eslint-plugin": "^14.0.0",
     "@angular-eslint/eslint-plugin-template": "^14.0.0",
     "@angular-eslint/schematics": "^14.0.0",
     "@angular-eslint/template-parser": "^14.0.0",
     "@eslint/js": "^9.28.0",
+    "@types/jasmine": "^5.1.8",
+    "@types/node": "^22.15.29",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "eslint": "^8.23.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsdoc": "^39.3.6",
     "eslint-plugin-prefer-arrow": "^1.2.3",
+    "jasmine-core": "^5.7.1",
+    "karma": "^6.4.4",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-coverage": "^2.2.1",
+    "karma-jasmine": "^5.1.0",
+    "karma-jasmine-html-reporter": "^2.1.0",
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "frontend": "file:"
+    "@angular/common": "^14.3.0",
+    "@angular/compiler": "^14.3.0",
+    "@angular/core": "^14.3.0",
+    "@angular/forms": "^14.3.0",
+    "@angular/platform-browser": "^14.3.0",
+    "@angular/platform-browser-dynamic": "^14.3.0",
+    "@angular/router": "^14.3.0",
+    "bootstrap": "^5.3.6",
+    "frontend": "file:",
+    "ngx-bootstrap": "^9.0.0",
+    "rxjs": "^7.5.0",
+    "zone.js": "^0.11.4"
   }
 }

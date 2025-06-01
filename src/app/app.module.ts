@@ -10,22 +10,24 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from './shared/components/components.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
+  // NO DECLARES AppComponent porque es standalone
   declarations: [
-    AppComponent,
+    // aquí no va AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ComponentsModule,
     BrowserAnimationsModule,
-     ModalModule.forRoot(),
+    ModalModule.forRoot(),
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule
-
+    // Elimina AppComponent de los imports
   ],
-  providers: [],
-  bootstrap: [AppComponent]  // 'AppComponent' es el componente raíz de la aplicación
+  providers: []
+  // Elimina bootstrap: [AppComponent]
 })
 export class AppModule { }

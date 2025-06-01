@@ -7,9 +7,9 @@ import { UserService } from 'src/app/service/user.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  users: any[] = [];  // Lista de usuarios
-  selectedUser: any = null;  // Usuario seleccionado para editar
-  isEdit: boolean = false; // Variable para saber si estamos en modo edición
+  users: any[] = [];
+  selectedUser: any = null;
+  isEdit: boolean = false;
 
   constructor(private userService: UserService) {}
 
@@ -17,87 +17,86 @@ export class UserListComponent implements OnInit {
     this.loadUsers();
   }
 
-
   loadUsers(): void {
-    this.userService.getAllUsers().subscribe(
-      (data) => {
-        this.users = data;
-      },
-      (error) => {
-        console.error('Error al cargar los usuarios', error);
-      }
-    );
+    this.userService.getAllUsers().subscribe({
+      next: (data) => this.users = data,
+      error: (err) => console.error('Error al cargar los usuarios', err)
+    });
   }
 
-
   saveUser(): void {
+    if (!this.selectedUser) {
+      console.warn('No hay usuario seleccionado para guardar.');
+      return;
+    }
+
     if (this.isEdit) {
-      this.updateUser(this.selectedUser.id, this.selectedUser);  // Actualizar usuario
+      this.updateUser(this.selectedUser.id, this.selectedUser);
     } else {
-      this.createUser(this.selectedUser);  // Crear nuevo usuario
+      this.createUser(this.selectedUser);
     }
   }
 
-
   createUser(user: any): void {
-    console.log("Creando usuario:", user);
-    this.userService.createUser(user).subscribe(
-      (newUser) => {
+    if (!user || !user.name) { // Ejemplo simple de validación
+      console.warn('Datos incompletos para crear usuario');
+      return;
+    }
 
+    this.userService.createUser(user).subscribe({
+      next: (newUser) => {
+        // Evita duplicados
         if (!this.users.some(u => u.id === newUser.id)) {
           this.users.push(newUser);
         }
         this.resetForm();
       },
-      (error) => {
-        console.error('Error al crear el usuario', error);
-      }
-    );
+      error: (err) => console.error('Error al crear el usuario', err)
+    });
   }
 
-
   updateUser(id: number, updatedUser: any): void {
-    this.userService.updateUser(id, updatedUser).subscribe(
-      (updated) => {
-        const index = this.users.findIndex(user => user.id === id);
+    if (!updatedUser || !id) {
+      console.warn('Datos inválidos para actualizar usuario');
+      return;
+    }
+
+    this.userService.updateUser(id, updatedUser).subscribe({
+      next: (updated) => {
+        const index = this.users.findIndex(u => u.id === id);
         if (index !== -1) {
           this.users[index] = updated;
         }
         this.resetForm();
       },
-      (error) => {
-        console.error('Error al actualizar el usuario', error);
-      }
-    );
+      error: (err) => console.error('Error al actualizar el usuario', err)
+    });
   }
 
-  // Eliminar un usuario
   deleteUser(id: number): void {
-    this.userService.deleteUser(id).subscribe(
-      () => {
+    this.userService.deleteUser(id).subscribe({
+      next: () => {
         this.users = this.users.filter(user => user.id !== id);
+        if (this.selectedUser?.id === id) {
+          this.resetForm();
+        }
       },
-      (error) => {
-        console.error('Error al eliminar el usuario', error);
-      }
-    );
+      error: (err) => console.error('Error al eliminar el usuario', err)
+    });
   }
-
 
   selectUser(user: any): void {
-    this.selectedUser = { ...user };
+    this.selectedUser = { ...user }; // Clonar para no modificar la lista directamente
     this.isEdit = true;
   }
 
-
   resetForm(): void {
     this.selectedUser = null;
-    this.isEdit = false;  
+    this.isEdit = false;
   }
 
-  // Mostrar formulario de nuevo usuario
   createNewUser(): void {
-    this.selectedUser = {};  // Limpiar los campos
-    this.isEdit = false;  // Habilitar el modo de creación
+    this.selectedUser = {};
+    this.isEdit = false;
   }
 }
